@@ -1,18 +1,20 @@
-class List{
+package data;
+
+public class List{
 
 	int items; //defaults to 0
 	String itemsString=""; 
 
-	void add(String item){
+	public void add(String item){
 		items++;
 		itemsString+=item+"\t";
 	}
 
-	void remove(String item){
+	public void remove(String item){
 		items--;
 	}
 
-	int count(){
+	public int count(){
 		return items;
 	}
 

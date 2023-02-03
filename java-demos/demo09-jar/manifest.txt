@@ -1,0 +1,3 @@
+CopyRight: ConceptArchitect
+AppVersion: 1.1.2
+Main-Class: in.conceptarchitect.app.FurnitureApp

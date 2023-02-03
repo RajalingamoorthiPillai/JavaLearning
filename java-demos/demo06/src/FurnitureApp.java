@@ -36,6 +36,10 @@ class FurnitureApp{
 
 		
 		System.out.println(t1);
+		//System.out.println(t1.price);
+
+		t1.add(1,1,"Chair");
+
 		System.out.println(b1);
 		System.out.println(inventory);
 		System.out.println(invoice1);
