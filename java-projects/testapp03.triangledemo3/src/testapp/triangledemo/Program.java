@@ -29,9 +29,6 @@ public class Program {
 		Triangle t4=new Triangle();
 		
 		testTriangle(t4);
-	
-		
-		
 		
 
 	}

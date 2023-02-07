@@ -8,7 +8,7 @@ public class Triangle {
 	
 	
 	double perimeter() {
-		return s1+s2+s3;
+		return s1+s2+s3*2;
 	}
 	
 	double area() {
