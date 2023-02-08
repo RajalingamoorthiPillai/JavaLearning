@@ -8,25 +8,35 @@ public class BankAccount {
 	String name;
 	String password;
 	double balance;
+	boolean active;
 	
-	static double interestRate;
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	//static double interestRate;
 	
-	static int lastId=0;
+	//static int lastId=0;
 	
 	@Deprecated
 	public BankAccount(int accountNumber, String name, String password, double amount, double interestRate) {
 		
-		this(name,password,amount,interestRate);
+		this(accountNumber,name,password,amount);
 		
 	}
 	
-	public BankAccount( String name, String password, double amount, double interestRate) {
-		lastId++;
-		this.accountNumber=lastId;
+	public BankAccount(int accountNumber, String name, String password, double amount) {
+		
+		this.accountNumber=accountNumber;
 		this.name = name;
 		setPassword(password);
-		this.balance = amount;
-		this.interestRate = interestRate;
+		this.balance = amount; 
+		this.active=true;
+		
 	}
 	
 	
@@ -57,13 +67,13 @@ public class BankAccount {
 		else if(!authenticate(password))
 			return BankingStatus.invalidCredentials;//System.out.println("invalid credentials");
 		else {
-			balance-=amount;
+			
 			return BankingStatus.success;//System.out.println("Please collect your cash");
 		}
 		
 	}
 	
-	public  void creditInterest() {
+	public  void creditInterest(double interestRate) {
 		balance+= balance*interestRate/1200;
 	}
 
@@ -81,17 +91,7 @@ public class BankAccount {
 
 
 
-	public static  double getInterestRate() {
-		return interestRate;
-	}
-
-
-
-	public static void setInterestRate(double interestRate) {
-		var delta =BankAccount.interestRate/10;
-		if(interestRate>= BankAccount.interestRate- delta && interestRate<=BankAccount.interestRate+delta)
-			BankAccount.interestRate = interestRate;
-	}
+	
 
 
 
@@ -124,6 +124,8 @@ public class BankAccount {
 		else
 			return false;
 	}
+
+	
 	
 	
 	

@@ -10,11 +10,11 @@ public class Program {
 		// TODO Auto-generated method stub
 		String password="p@ss";
 		var amount=20000;
-		var a1=new BankAccount(1, "Vivek", password, amount, 12);
+		var a1=new BankAccount(1, "Vivek", password, amount,12);
 		
 		var p=new Program();
 		p.welcome();
-		
+		 
 		
 		
 		depositTests("Deposit fails for negative amount", a1, -1, false);
