@@ -62,7 +62,7 @@ public class BankAccount {
 	public BankingStatus withdraw(double amount,String password) {
 		if(amount<0)
 			return BankingStatus.invalidAmount;//System.out.println("withdraw failed for negative amount");
-		else if(amount>balance)
+		else if(amount>getMaxWithdrawableAmount())
 			return BankingStatus.insufficientBalance;//System.out.println("insufficient balance");
 		else if(!authenticate(password))
 			return BankingStatus.invalidCredentials;//System.out.println("invalid credentials");
@@ -73,6 +73,11 @@ public class BankAccount {
 		
 	}
 	
+	public double getMaxWithdrawableAmount() {
+		// TODO Auto-generated method stub
+		return balance;
+	}
+
 	public  void creditInterest(double interestRate) {
 		balance+= balance*interestRate/1200;
 	}
@@ -123,6 +128,20 @@ public class BankAccount {
 		}
 		else
 			return false;
+	}
+
+	public BankingStatus close(String password) {
+		// TODO Auto-generated method stub
+		if(!authenticate(password))
+			return BankingStatus.invalidCredentials;
+		
+		if(getBalance()<0)
+			return BankingStatus.insufficientBalance;
+		
+		
+		setActive(false);
+		return BankingStatus.success;
+			
 	}
 
 	

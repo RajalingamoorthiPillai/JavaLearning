@@ -11,14 +11,20 @@ public class SavingsAccount extends BankAccount {
 		// TODO Auto-generated method stub
 		return 5000;
 	}
-
+	
 	@Override
-	public BankingStatus withdraw(double amount, String password) {
-		if(amount>getBalance()-getMinBalance())
-			return BankingStatus.insufficientBalance;
-		else
-			return super.withdraw(amount, password);
-		
+	public double getMaxWithdrawableAmount() {
+		// TODO Auto-generated method stub
+		return getBalance()-getMinBalance();
 	}
+
+//	@Override
+//	public BankingStatus withdraw(double amount, String password) {
+//		if(amount>getBalance()-getMinBalance())
+//			return BankingStatus.insufficientBalance;
+//		else
+//			return super.withdraw(amount, password);
+//		
+//	}
 	
 }

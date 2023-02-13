@@ -45,15 +45,9 @@ public class Bank {
 		if(!account.isActive())
 			return new StatusResult(BankingStatus.invalidAccountNumber);
 		
-		if(!account.authenticate(password))
-			return new StatusResult(BankingStatus.invalidCredentials);
+		var status= account.close(password);
 		
-		if(account.getBalance()<0)
-			return new StatusResult(BankingStatus.insufficientBalance);
-		
-		account.setActive(false);
-		
-		return new StatusResult(BankingStatus.success, account.getBalance());
+		return new StatusResult(status, account.getBalance());
 	}
 
 	public void creditInterest() {
