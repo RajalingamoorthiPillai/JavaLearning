@@ -7,7 +7,7 @@ public class BankAccount {
 	int accountNumber;
 	String name;
 	String password;
-	double balance;
+	private double balance;
 	boolean active;
 	
 	public boolean isActive() {
@@ -67,7 +67,7 @@ public class BankAccount {
 		else if(!authenticate(password))
 			return BankingStatus.invalidCredentials;//System.out.println("invalid credentials");
 		else {
-			
+			balance-=amount;
 			return BankingStatus.success;//System.out.println("Please collect your cash");
 		}
 		
