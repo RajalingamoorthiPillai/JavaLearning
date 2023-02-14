@@ -5,7 +5,7 @@ import in.conceptarchitect.animals.Animal;
 public abstract class Bird extends Animal {
 	
 	@Override
-	public String breed() {
+	public final String breed() {
 		// TODO Auto-generated method stub
 		return this+" lays eggs";
 	}

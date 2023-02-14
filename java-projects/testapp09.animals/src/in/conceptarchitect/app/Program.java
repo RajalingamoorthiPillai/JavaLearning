@@ -1,8 +1,9 @@
 package in.conceptarchitect.app;
 
+import java.util.ArrayList;
+
 import in.conceptarchitect.animals.Animal;
 import in.conceptarchitect.animals.Hunter;
-import in.conceptarchitect.animals.Pet;
 import in.conceptarchitect.animals.birds.Eagle;
 import in.conceptarchitect.animals.birds.Parrot;
 import in.conceptarchitect.animals.mammals.Camel;
@@ -56,6 +57,11 @@ public class Program {
 		}
 		
 
+		System.out.println("List of Hunters");
+		for(var hunter : getHunters(animals) )
+			System.out.println(hunter.hunt());
+		
+		
 	}
 
 	
@@ -82,5 +88,34 @@ public class Program {
 			System.out.println(tiger.hunt());
 		}
 	}
+	
+	static ArrayList<Hunter> getHunters(Animal [] animals) {
+			
+			var hunters=new ArrayList<Hunter>();
+			
+			for(var animal : animals) {
+				if(animal instanceof Hunter) {
+					hunters.add((Hunter)animal);
+				}
+			}
+			
+			return hunters;
+		}
+		
+
+	
+	
+	static ArrayList getHunters0(Animal [] animals) {
+		
+		ArrayList hunters=new ArrayList();
+		for(var animal : animals) {
+			if(animal instanceof Hunter) {
+				hunters.add(animal);
+			}
+		}
+		
+		return hunters;
+	}
+	
 
 }
