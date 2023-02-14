@@ -2,7 +2,7 @@ package in.conceptarchitect.banking;
 
 import in.conceptarchitect.utils.Encrypt;
 
-public class BankAccount {
+public abstract class BankAccount {
 	
 	int accountNumber;
 	String name;
@@ -73,10 +73,7 @@ public class BankAccount {
 		
 	}
 	
-	public double getMaxWithdrawableAmount() {
-		// TODO Auto-generated method stub
-		return balance;
-	}
+	public abstract double getMaxWithdrawableAmount();
 
 	public  void creditInterest(double interestRate) {
 		balance+= balance*interestRate/1200;

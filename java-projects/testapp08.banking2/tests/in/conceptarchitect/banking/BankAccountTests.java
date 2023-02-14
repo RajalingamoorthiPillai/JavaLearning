@@ -17,7 +17,7 @@ public class BankAccountTests {
 	@Before
 	public void setup() {
 		//BankAccount.lastId=0;
-		account=new BankAccount(1,"Vivek",password,amount);
+		account=new SavingsAccount(1,"Vivek",password,amount);
 	}
 	
 	@Test
@@ -27,8 +27,8 @@ public class BankAccountTests {
 	
 	@Test
 	public void accountsHaveSequentialId() {
-		var a2=new BankAccount(2,"Someone",password,amount);
-		var a3=new BankAccount(3,"Someone",password,amount);
+		var a2=new SavingsAccount(2,"Someone",password,amount);
+		var a3=new SavingsAccount(3,"Someone",password,amount);
 		
 		assertEquals(2, a2.getAccountNumber());
 		assertEquals(3,a3.getAccountNumber());
@@ -36,7 +36,7 @@ public class BankAccountTests {
 	
 	@Test
 	public void accountNumberShouldBeUnique() {
-		var a2=new BankAccount(2,"Vivek",password,amount);
+		var a2=new SavingsAccount(2,"Vivek",password,amount);
 		assertNotEquals(account.getAccountNumber(), a2.getAccountNumber());
 	}
 	

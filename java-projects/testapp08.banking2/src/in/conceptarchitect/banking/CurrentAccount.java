@@ -12,4 +12,10 @@ public class CurrentAccount extends BankAccount {
 		
 	}
 
+	@Override
+	public double getMaxWithdrawableAmount() {
+		// TODO Auto-generated method stub
+		return getBalance();
+	}
+
 }

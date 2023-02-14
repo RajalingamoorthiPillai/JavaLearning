@@ -27,7 +27,7 @@ public class Bank {
 	public int openAccount(String name, String password, double amount) {
 		// TODO Auto-generated method stub
 		lastId++;
-		var account=new BankAccount(lastId, name, password, amount);
+		var account=new SavingsAccount(lastId, name, password, amount);
 		
 		
 		accounts[lastId]=account;
@@ -63,9 +63,40 @@ public class Bank {
 		return new StatusResult(BankingStatus.invalidCredentials);
 	}
 	
+	
+	public BankingStatus transfer(int sourceAccount, String password, double amount, int targetAccount) {
+		var source= getAccount(sourceAccount);
+		var target=getAccount(targetAccount);
+		
+		if(source==null)
+			return BankingStatus.invalidAccountNumber;
+		if(target==null)
+			return BankingStatus.invalidAccountNumber;
+		
+		var result= source.withdraw(amount, password);
+		if(result==BankingStatus.success) {
+			target.deposit(amount);
+			
+		}
+		return result;
+			
+	}
 
 
 
+
+	private BankAccount getAccount(int accountNumber) {
+		// TODO Auto-generated method stub
+		if(accountNumber<1 || accountNumber>lastId)
+			return null;
+		
+		var account=accounts[accountNumber];
+		if(!account.isActive())
+			return null;
+		else
+			return account;
+	
+	}
 
 	public void setInterestRate(double interestRate) {
 		if(this.interestRate==0) {
