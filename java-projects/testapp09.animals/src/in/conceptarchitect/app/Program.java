@@ -101,13 +101,10 @@ public class Program {
 			
 			return hunters;
 		}
-		
-
 	
-	
-	static ArrayList getHunters0(Animal [] animals) {
+	static ArrayList<Object> getHunters0(Animal [] animals) {
 		
-		ArrayList hunters=new ArrayList();
+		ArrayList<Object> hunters=new ArrayList<>();
 		for(var animal : animals) {
 			if(animal instanceof Hunter) {
 				hunters.add(animal);
