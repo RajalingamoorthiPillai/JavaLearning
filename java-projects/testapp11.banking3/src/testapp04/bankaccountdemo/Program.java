@@ -15,11 +15,9 @@ public class Program {
 		withdrawTests("Happy Path", account, 1, password,BankingStatus.success);
 		withdrawTests("Insufficient Balance", account, amount+1, password, BankingStatus.insufficientBalance);
 		
-		try {
-			withdrawTests("Invalid Credentials", account,1,"wrong apssword", BankingStatus.invalidCredentials);
-		}catch(RuntimeException ex) {
-			System.out.println("Passed: Invalid Credentials");
-		}
+		
+		withdrawTests("Invalid Credentials", account,1,"wrong apssword", BankingStatus.invalidCredentials);
+		
 		
 	}
 	

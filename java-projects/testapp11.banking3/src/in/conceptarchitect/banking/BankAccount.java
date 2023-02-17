@@ -118,7 +118,7 @@ public abstract class BankAccount {
 		if(this.password.equals(en.encrypt(password)))
 			return true;
 		else
-			return false;			//throw new RuntimeException("Invalid Credentials");
+			throw new RuntimeException("Invalid Credentials");
 	}
 	
 	public boolean changePassword(String oldPassword, String newPassword) {

@@ -109,4 +109,35 @@ public class Bank {
 			this.interestRate = interestRate;
 	}
 
+	public String getAccountDetails(int accountNumber, String password) {
+		// TODO Auto-generated method stub
+		var account=getAccount(accountNumber);
+		if(account!=null && account.authenticate(password))
+		{
+			return account.toString();
+		}
+		else
+			return null;
+				
+	}
+
+	public boolean deposit(int accountNumber, int amount) {
+		// TODO Auto-generated method stub
+		var account=getAccount(accountNumber);
+		if(account==null)
+			return false;
+		else
+			return account.deposit(amount);
+	}
+
+	public BankingStatus withdraw(int accountNumber,String password, int amount) {
+		// TODO Auto-generated method stub
+		var account=getAccount(accountNumber);
+		if(account==null)
+			return BankingStatus.invalidAccountNumber;
+		else
+			return account.withdraw(amount, password);
+		
+	}
+
 }
