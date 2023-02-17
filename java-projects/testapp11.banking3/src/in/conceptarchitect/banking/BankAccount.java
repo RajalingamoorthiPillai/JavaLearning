@@ -1,5 +1,8 @@
 package in.conceptarchitect.banking;
 
+import in.conceptarchitect.banking.exceptions.InsufficientBalanceException;
+import in.conceptarchitect.banking.exceptions.InvalidCredentialsException;
+import in.conceptarchitect.banking.exceptions.InvalidDenominationException;
 import in.conceptarchitect.utils.Encrypt;
 
 public abstract class BankAccount {
@@ -49,27 +52,44 @@ public abstract class BankAccount {
 
 
 
-	public boolean deposit(double amount) {
-		if(amount>0) {
-			balance+=amount;
-			return true;
-		}else {
-			//System.out.println("deposit failed. for "+amount);
-			return false;
-		}
+	public void deposit(double amount) {
+		
+		validateAmount(amount);
+		balance+=amount;
+		
 	}
 	
-	public BankingStatus withdraw(double amount,String password) {
+	public void withdraw(double amount,String password) {
+		
+		authenticate(password);
+		validateAmount(amount);
+		
+		var max=getMaxWithdrawableAmount();
+		if(amount>max)
+			throw new InsufficientBalanceException(accountNumber, amount-max);
+		
+		balance-=amount;
+		
+		
+	}
+	
+	private void validateAmount(double amount) {
+		// TODO Auto-generated method stub
 		if(amount<0)
-			return BankingStatus.invalidAmount;//System.out.println("withdraw failed for negative amount");
-		else if(amount>getMaxWithdrawableAmount())
-			return BankingStatus.insufficientBalance;//System.out.println("insufficient balance");
-		else if(!authenticate(password))
-			return BankingStatus.invalidCredentials;//System.out.println("invalid credentials");
-		else {
-			balance-=amount;
-			return BankingStatus.success;//System.out.println("Please collect your cash");
-		}
+			throw new InvalidDenominationException(accountNumber, "Amount Must Be greater than 0");
+	}
+
+	public void authenticate(String password) {
+		Encrypt en=new Encrypt();
+		if(!this.password.equals(en.encrypt(password)))
+			//throw new RuntimeException("Invalid Credentials");
+			throw new InvalidCredentialsException(accountNumber);
+			
+	}
+	
+	public void changePassword(String oldPassword, String newPassword) {
+		authenticate(oldPassword);
+		setPassword(newPassword);
 		
 	}
 	
@@ -113,34 +133,17 @@ public abstract class BankAccount {
 		this.password= en.encrypt(password);
 	}
 	
-	public boolean authenticate(String password) {
-		Encrypt en=new Encrypt();
-		if(this.password.equals(en.encrypt(password)))
-			return true;
-		else
-			throw new RuntimeException("Invalid Credentials");
-	}
 	
-	public boolean changePassword(String oldPassword, String newPassword) {
-		if(authenticate(oldPassword)) {
-			setPassword(newPassword);
-			return true;
-		}
-		else
-			return false;
-	}
 
-	public BankingStatus close(String password) {
+	public void close(String password) {
 		// TODO Auto-generated method stub
-		if(!authenticate(password))
-			return BankingStatus.invalidCredentials;
+		authenticate(password);
+			
 		
 		if(getBalance()<0)
-			return BankingStatus.insufficientBalance;
-		
-		
+			throw new InsufficientBalanceException(accountNumber, -getBalance(),"You need to clear your dues to close the account");
 		setActive(false);
-		return BankingStatus.success;
+
 			
 	}
 

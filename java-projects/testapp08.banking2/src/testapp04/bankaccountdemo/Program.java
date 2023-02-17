@@ -14,7 +14,12 @@ public class Program {
 		bank.openAccount("Aman", password, amount);
 		
 		ATM atm=new ATM(bank);
+		try {
+			atm.start();
+		}catch(RuntimeException ex) {
+			System.err.println("In Main Program:"+ex.getMessage());
+		}
 		
-		atm.start();
+		System.out.println("ATM Shutdown");
 	}
 }
