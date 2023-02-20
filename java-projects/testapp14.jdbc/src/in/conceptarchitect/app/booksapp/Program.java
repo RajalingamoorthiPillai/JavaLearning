@@ -8,13 +8,16 @@ import java.sql.Statement;
 
 public class Program {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 
-		String url="postgres://zahvianw:DSoDS_5wZjDmOjgVeR6OxqgdRjp-NEpp@mahmud.db.elephantsql.com/zahvianw";
+		String url="jdbc:postgres://zahvianw:DSoDS_5wZjDmOjgVeR6OxqgdRjp-NEpp@mahmud.db.elephantsql.com/zahvianw";
+		//String url="jdbc:mysql://localhost/booksdb?user=root&password=@DM1n.";
+		
 		Connection connection=null;
+		
 		try {
-			
+			Class.forName("org.postgresql.Driver");
 			connection = DriverManager.getConnection(url);
 			
 			Statement statement= connection.createStatement();
