@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import in.conceptarchitect.animals.Hunter;
@@ -226,4 +227,17 @@ public class ReflectionTests {
 		assertEquals("Leopard has no speciality fly", ex.getMessage());
 	}
 	
+	@Ignore
+	@Test(expected=NoSuchMethodException.class)
+	public void throwsNoSuchMethodException() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		t1.getClass().getMethod("fly").invoke(t1);
+	}
+	
+	@Test
+	public void throwsNoSuchMethodExceptionUsingAssertThrows()  {
+		assertThrows(NoSuchMethodException.class, ()->{
+			t1.getClass().getMethod("fly").invoke(t1);	
+		});
+		
+	}
 }

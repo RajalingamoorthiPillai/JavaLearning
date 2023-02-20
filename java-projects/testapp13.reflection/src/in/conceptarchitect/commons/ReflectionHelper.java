@@ -53,7 +53,8 @@ public class ReflectionHelper {
 				throw new MethodInvocationException( e.getMessage(),e);
 			}
 		} else {
-			throw new MethodInvocationException(cls.getSimpleName()+" has no speciality "+behaviorName, new NoSuchMethodException(behaviorName));
+			throw new MethodInvocationException(cls.getSimpleName()+" has no speciality "+behaviorName, 
+					new NoSuchMethodException(behaviorName));
 		}
 	}
 
