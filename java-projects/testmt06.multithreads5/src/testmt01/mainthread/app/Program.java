@@ -19,10 +19,19 @@ public class Program {
 		//put main to sleep.
 		//makeMainSleep();
 		
-		isAliveTest(t1, t2, t3);
+		//isAliveTest(t1, t2, t3);
+		
+		t1.join();  //current thread waits (sleeps) till t1 finishes
+		t2.join();  
+		t3.join();
 		
 		System.out.println("end of program");
 		
+	}
+	
+	static void wait(Thread t) {
+		while(t.isAlive())
+			try{Thread.sleep(100);}catch(InterruptedException e) {}w
 	}
 
 	private static void isAliveTest(Thread t1, Thread t2, Thread t3) {

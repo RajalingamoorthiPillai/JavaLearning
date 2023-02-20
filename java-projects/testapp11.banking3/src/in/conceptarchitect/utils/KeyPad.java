@@ -1,6 +1,7 @@
 package in.conceptarchitect.utils;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class KeyPad {
@@ -15,7 +16,7 @@ public class KeyPad {
 		try {
 			System.out.print(prompt);
 			return reader.readLine();
-		}catch(Exception ex) {
+		}catch(IOException ex) {
 			return "";
 		}
 	}
@@ -23,6 +24,7 @@ public class KeyPad {
 	public int readInt(String prompt) {
 		
 		var str=readString(prompt);
+		
 		return Integer.parseInt(str);
 	
 	}
