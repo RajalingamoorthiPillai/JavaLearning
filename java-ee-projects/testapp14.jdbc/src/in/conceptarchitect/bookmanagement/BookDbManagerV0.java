@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDbManager {
+public class BookDbManagerV0 {
 	
 	String url;
 	String userName;
@@ -14,7 +14,7 @@ public class BookDbManager {
 	
 	
 	
-	public BookDbManager(String url, String userName, String password) {
+	public BookDbManagerV0(String url, String userName, String password) {
 		super();
 		this.url = url;
 		this.userName = userName;
