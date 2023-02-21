@@ -11,14 +11,15 @@ public class Program {
 	public static void main(String[] args) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 
-		String url="jdbc:postgres://zahvianw:DSoDS_5wZjDmOjgVeR6OxqgdRjp-NEpp@mahmud.db.elephantsql.com/zahvianw";
+		String url="jdbc:postgresql://mahmud.db.elephantsql.com/zahvianw";
 		//String url="jdbc:mysql://localhost/booksdb?user=root&password=@DM1n.";
-		
+		String user="zahvianw";
+		String password="DSoDS_5wZjDmOjgVeR6OxqgdRjp-NEpp";          
 		Connection connection=null;
 		
 		try {
-			Class.forName("org.postgresql.Driver");
-			connection = DriverManager.getConnection(url);
+			//Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection(url,user,password);
 			
 			Statement statement= connection.createStatement();
 			
