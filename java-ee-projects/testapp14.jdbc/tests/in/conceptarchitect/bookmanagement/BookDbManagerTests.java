@@ -12,12 +12,14 @@ import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
 
+import in.conceptarchitect.jdbc.DbManager;
+
 public class BookDbManagerTests {
 
 	String url="jdbc:mysql://localhost/booksdb_test";
 	String userName="root";
 	String password="@DM1n.";
-	BookDbManager db;
+	BookDbManagerV0 db;
 	
 	String id1="111", id2="222";
 	String title1="The Accursed God", title2="Kane And Abel";
@@ -25,7 +27,9 @@ public class BookDbManagerTests {
 	@Before
 	public void init() throws SQLException
 	{
-		db=new BookDbManager(url, userName, password);
+		//db=new BookDbManager(url, userName, password);
+		
+		db=new BookDbManagerV0(url, userName, password);
 		
 		setupDb();
 		
@@ -85,6 +89,8 @@ public class BookDbManagerTests {
 
 	@Test
 	public void getAllBooksReturnsListOfAllBooks() {
+		
+		
 		var result=db.getAllBooks();
 		
 		assertEquals(2, result.size());

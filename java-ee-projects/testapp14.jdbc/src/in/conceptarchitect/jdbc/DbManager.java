@@ -3,9 +3,8 @@ package in.conceptarchitect.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
-import in.conceptarchitect.bookmanagement.Book;
 import in.conceptarchitect.bookmanagement.JdbcException;
 
 public class DbManager {
@@ -39,4 +38,38 @@ public class DbManager {
 		}
 	}
 
+	public int executeUpdate(String qry) {
+		
+		return executeCommand(connection->{
+			var statement=connection.createStatement();
+			return statement.executeUpdate(qry);
+		});
+	}
+	
+	public int executePrepared(String query, StatementBuilder builder) {
+		
+		return executeCommand(connection->{
+			
+			var statement= connection.prepareStatement(query);
+			builder.build(statement);
+			return statement.executeUpdate();
+			
+		}) ;
+	}
+	
+	
+	public <X> List<X> queryAll(String query/*,???*/){
+		
+		return null;
+	}
+	
+	public <X>   X   queryOne(String query /*,???*/) {
+		return null;
+	}
+	
+	
+	
+	
+	
+	
 }
