@@ -31,7 +31,7 @@ public class BookDbManagerV1 {
 
 	public List<Book> getAllBooks(){
 		
-		return db.executeCommand(connection->{
+		return db.executeCommand((connection)->{
 			
 			var statement=connection.createStatement();
 			var rs= statement.executeQuery("select * from books");

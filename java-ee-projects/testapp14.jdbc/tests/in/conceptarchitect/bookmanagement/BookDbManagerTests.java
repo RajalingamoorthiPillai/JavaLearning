@@ -115,8 +115,36 @@ public class BookDbManagerTests {
 		var result=db.removeBook(id1);
 		assertTrue(result);
 		
-		assertThrows(EntityNotFoundException.class, ()->db.getBookById(id1));
+		assertThrows(EntityNotFoundException.class, ()->{
+			db.getBookById(id1);	
+		});
 	}
+	
+	
+	public void faultyFunction() {
+		throw new RuntimeException();
+	}
+	
+	
+	@Test
+	public void faultyFunctionThrowsRuntimeException() {
+		
+		//assertThrows(RuntimeException.class, () -> faultyFunction());
+		
+		assertThrows(RuntimeException.class, this::faultyFunction);
+		
+	}
+	
+	@Test
+	public void getAllBooksMayThrowJdbcExceptionOnWrongPassword() {
+		var db=new BookDbManager(new DbManager(url, userName, "wrong-password"));
+		
+		//assertThrows(JdbcException.class, ()->db.getAllBooks());
+		assertThrows(JdbcException.class, db::getAllBooks);
+	}
+	
+	
+	
 	
 	@Test
 	public void removeBookReturnsFalseForBookWithInvalidId() {
