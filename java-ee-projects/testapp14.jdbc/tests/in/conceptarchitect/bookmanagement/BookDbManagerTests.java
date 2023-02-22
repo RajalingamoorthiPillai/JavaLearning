@@ -141,6 +141,8 @@ public class BookDbManagerTests {
 		
 		//assertThrows(JdbcException.class, ()->db.getAllBooks());
 		assertThrows(JdbcException.class, db::getAllBooks);
+		
+		
 	}
 	
 	
