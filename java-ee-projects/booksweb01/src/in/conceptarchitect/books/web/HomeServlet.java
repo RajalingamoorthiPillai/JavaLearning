@@ -28,17 +28,20 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String url="jdbc:mysql://localhost/booksdb";
-		String userName="root";
-		String password="@DM1n.";
-		var bookManager= new BookDbManager(new DbManager(url,userName,password));
+		
 		var writer=new PrintWriter(response.getWriter(),true);
-		var books= bookManager.getAllBooks();
-		writer.println("<ul>");
-		for(var book : books) {
-			writer.printf("<li>%s</li>", book.getTitle());
-		}
-		writer.println("</ul>");
+		
+//		String url="jdbc:mysql://localhost/booksdb";
+//		String userName="root";
+//		String password="@DM1n.";
+//		var bookManager= new BookDbManager(new DbManager(url,userName,password));
+		
+//		var books= bookManager.getAllBooks();
+//		writer.println("<ul>");
+//		for(var book : books) {
+//			writer.printf("<li>%s</li>", book.getTitle());
+//		}
+		writer.println("<h1>Welcome</h1>");
 		writer.close();
 	}
 

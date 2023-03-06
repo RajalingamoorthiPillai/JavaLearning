@@ -1,0 +1,15 @@
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  
+	  <servlet>
+	  	<servlet-class>in.conceptarchitect.books.web.BookListServlet</servlet-class>
+	  	<servlet-name>book-list</servlet-name>
+	  </servlet>
+
+	<servlet-mapping>
+		<servlet-name>book-list</servlet-name>
+		<url-pattern>/book/list</url-pattern>
+	</servlet-mapping>  
+  
+</web-app>

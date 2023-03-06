@@ -21,6 +21,11 @@ public class DbManager {
 	public <X> X  executeCommand(ConnectionCommand<X> command) {
 		Connection connection=null;
 		try {			
+			
+			//new com.mysql.jdbc.Driver();
+			
+			//Class.forName("com.mysql.jdbc.Driver");
+			
 			connection=DriverManager.getConnection(url,userName,password);
 
 			return command.execute(connection);

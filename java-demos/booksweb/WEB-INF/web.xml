@@ -4,11 +4,31 @@
         <servlet-name>welcome</servlet-name>
         <servlet-class>HelloWorldServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>book-list</servlet-name>
+        <servlet-class>BookListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>book-details</servlet-name>
+        <servlet-class>BookDetailsServlet</servlet-class>
+    </servlet>
 
+
+    
+    <servlet-mapping>
+        <servlet-name>book-list</servlet-name>
+        <url-pattern>/book/list</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>book-details</servlet-name>
+        <url-pattern>/book/details/*</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>welcome</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+    
 
 </web-app>

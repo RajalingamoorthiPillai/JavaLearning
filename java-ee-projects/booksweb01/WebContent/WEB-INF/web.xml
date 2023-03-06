@@ -15,9 +15,19 @@
   	<servlet-class>in.conceptarchitect.books.web.HomeServlet</servlet-class>
   </servlet>
   
+   <servlet>
+  	<servlet-name>book-details</servlet-name>
+  	<servlet-class>in.conceptarchitect.books.web.BookDetailsServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>book-details</servlet-name>
+  	<url-pattern>/book/details/*</url-pattern>
+  </servlet-mapping>
+  
   <servlet-mapping>
   	<servlet-name>welcome</servlet-name>
-  	<url-pattern>/*</url-pattern>
+  	<url-pattern>/welcome</url-pattern>
   </servlet-mapping>
   
 </web-app>
