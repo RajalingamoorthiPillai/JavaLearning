@@ -5,27 +5,20 @@ import java.util.List;
 
 import in.conceptarchitect.dbutils.DbManager;
 
-public class BookDbManager {
+public class DbManagerBookService implements BookService {
 	
+	//dependency inversion
 	DbManager db;
-	String url,userName,password;
 	
-	
-	
-	
-	public BookDbManager(String url, String userName, String password) {
-		super();
-		this.url = url;
-		this.userName = userName;
-		this.password = password;
-	}
 
-	public BookDbManager(DbManager db) {
+	//dependency injection
+	public DbManagerBookService(DbManager db) {
 		super();
 		this.db=db;
 		
 	}
 
+	@Override
 	public List<Book> getAllBooks(){
 		
 		return db.executeCommand(connection->{
@@ -59,6 +52,7 @@ public class BookDbManager {
 		
 	}
 
+	@Override
 	public Book getBookById(String id) {
 		
 		return db.executeCommand(connection->{
@@ -85,6 +79,7 @@ public class BookDbManager {
 			
 	}
 	
+	@Override
 	public void addBook(Book book) {
 		
 		db.executePrepared("insert into books "
@@ -105,12 +100,14 @@ public class BookDbManager {
 		
 	}
 	
+	@Override
 	public boolean removeBook(String id) {
 		
 		return db.executeUpdate("delete from books where isbn='"+id+"'")==1;
 		
 	}
 	
+	@Override
 	public void updateBook(Book book) {
 		
 		db.executePrepared( " update books "					

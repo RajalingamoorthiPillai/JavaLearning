@@ -10,6 +10,18 @@
 	<servlet-mapping>
 		<servlet-name>book-list</servlet-name>
 		<url-pattern>/book/list</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+	  	<servlet-class>in.conceptarchitect.books.web.LoginServlet</servlet-class>
+	  	<servlet-name>signin</servlet-name>
+	  </servlet>
+
+	<servlet-mapping>
+		<servlet-name>signin</servlet-name>
+		<url-pattern>/user/signin</url-pattern>
 	</servlet-mapping>  
+	  
   
 </web-app>

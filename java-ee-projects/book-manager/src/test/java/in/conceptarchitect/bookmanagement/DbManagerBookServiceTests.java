@@ -17,12 +17,12 @@ import in.conceptarchitect.dbutils.JdbcException;
 
 
 
-public class BookDbManagerTests {
+public class DbManagerBookServiceTests {
 
 	String url="jdbc:mysql://localhost/booksdb_test";
 	String userName="root";
 	String password="@DM1n.";
-	BookDbManager bookManager;
+	BookService bookManager;
 	
 	String id1="111", id2="222";
 	String title1="The Accursed God", title2="Kane And Abel";
@@ -33,7 +33,7 @@ public class BookDbManagerTests {
 	{
 		//db=new BookDbManager(url, userName, password);
 		var dbManager=new DbManager(url, userName, password);
-		bookManager=new BookDbManager(dbManager);
+		bookManager=new DbManagerBookService(dbManager);
 		
 		setupDb();
 		
@@ -147,7 +147,7 @@ public class BookDbManagerTests {
 	
 	@Test
 	public void getAllBooksMayThrowJdbcExceptionOnWrongPassword() {
-		var db=new BookDbManager(new DbManager(url, userName, "wrong-password"));
+		BookService db=new DbManagerBookService(new DbManager(url, userName, "wrong-password"));
 		
 		//assertThrows(JdbcException.class, ()->db.getAllBooks());
 		assertThrows(JdbcException.class, db::getAllBooks);
