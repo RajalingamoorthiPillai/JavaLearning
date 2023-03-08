@@ -1,8 +1,12 @@
 package in.conceptarchitect.bookmanagement.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +24,10 @@ public class Author {
 	
 	@Column(name="profile_photo")
 	public String photoUrl;
+	
+	
+	@OneToMany(mappedBy = "author")
+	public List<Book> books=new ArrayList<Book>();
 	
 	
 	public String getId() {

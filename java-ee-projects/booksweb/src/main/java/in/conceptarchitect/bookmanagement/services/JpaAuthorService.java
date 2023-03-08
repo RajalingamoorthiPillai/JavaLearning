@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import in.conceptarchitect.bookmanagement.entities.Author;
+import in.conceptarchitect.bookmanagement.entities.DuplicateEntityException;
 import in.conceptarchitect.bookmanagement.entities.EntityNotFoundException;
 import in.conceptarchitect.bookmanagement.repositories.AuthorRepository;
 
@@ -19,7 +20,13 @@ public class JpaAuthorService implements AuthorService {
 	@Override
 	public Author addAuthor(Author author) {
 		// TODO Auto-generated method stub
-		return repository.save(author);
+		try {
+				var dbAuthor=getAuthorById(author.getId());
+				throw new DuplicateEntityException("Duplicate Id:"+author.getId());
+		}catch(EntityNotFoundException ex) {
+			return repository.save(author);	
+		}		
+		
 	}
 
 	@Override
