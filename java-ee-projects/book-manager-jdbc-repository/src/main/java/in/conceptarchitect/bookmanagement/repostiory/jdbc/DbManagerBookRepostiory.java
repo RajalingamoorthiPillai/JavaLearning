@@ -1,5 +1,7 @@
 package in.conceptarchitect.bookmanagement.repostiory.jdbc;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import in.conceptarchitect.bookmanagement.Book;
 import in.conceptarchitect.bookmanagement.BookRepository;
 import in.conceptarchitect.bookmanagement.EntityNotFoundException;
 import in.conceptarchitect.dbutils.DbManager;
+import in.conceptarchitect.dbutils.ResultSetToObject;
 
 public class DbManagerBookRepostiory implements BookRepository {
 	
@@ -20,43 +23,71 @@ public class DbManagerBookRepostiory implements BookRepository {
 		this.db=db;
 		
 	}
+	
+	void resultSetToBook(Book book, ResultSet rs) throws SQLException {
+		book.setTitle(rs.getString("title"));
+		book.setAuthor(rs.getString("author"));
+		book.setPrice(rs.getInt("price"));
+		book.setRating(rs.getDouble("rating"));
+		book.setDescription(rs.getString("description"));
+		book.setTags(rs.getString("tags"));
+		book.setCover(rs.getString("cover"));
+		book.setId(rs.getString("isbn"));
+	}
+	
+	
+
+//	@Override
+//	public List<Book> getAll(){
+//		
+//		return db.executeCommand(connection->{
+//			
+//			var statement=connection.createStatement();
+//			var rs= statement.executeQuery("select * from books");
+//			var books=new ArrayList<Book>();
+//			while(rs.next()) {
+//				
+//				var book=new Book();
+//				book.setTitle(rs.getString("title"));
+//				book.setAuthor(rs.getString("author"));
+//				book.setPrice(rs.getInt("price"));
+//				book.setRating(rs.getDouble("rating"));
+//				book.setDescription(rs.getString("description"));
+//				book.setTags(rs.getString("tags"));
+//				book.setCover(rs.getString("cover"));
+//				book.setId(rs.getString("isbn"));
+//				
+//				books.add(book);
+//			}
+//			
+//			return books;
+//		});
+//		
+//		
+//			
+//			
+//		
+//		
+//		
+//	}
 
 	@Override
 	public List<Book> getAll(){
 		
-		return db.executeCommand(connection->{
-			
-			var statement=connection.createStatement();
-			var rs= statement.executeQuery("select * from books");
-			var books=new ArrayList<Book>();
-			while(rs.next()) {
-				
-				var book=new Book();
-				book.setTitle(rs.getString("title"));
-				book.setAuthor(rs.getString("author"));
-				book.setPrice(rs.getInt("price"));
-				book.setRating(rs.getDouble("rating"));
-				book.setDescription(rs.getString("description"));
-				book.setTags(rs.getString("tags"));
-				book.setCover(rs.getString("cover"));
-				book.setId(rs.getString("isbn"));
-				
-				books.add(book);
-			}
-			
-			return books;
-		});
-		
-		
-			
-			
-		
-		
+		//return db.queryAll("select * from books", Book.class, this::resultSetToBook);
+		return db.queryAll("select * from books", Book.class, ResultSetToObject::build);
 		
 	}
 
+	
 	@Override
 	public Book getById(String id) {
+		
+		return db.queryOne("select * from books where isbn='"+id+"'", Book.class, this::resultSetToBook);
+	}
+	
+	
+	public Book getById0(String id) {
 		
 		return db.executeCommand(connection->{
 			var statement=connection.createStatement();
